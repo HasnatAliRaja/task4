@@ -1,0 +1,153 @@
+.homeContainer {
+  overflow: hidden;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 0.02fr 1fr;
+  overflow: hidden;
+}
+.illustration {
+  width: 700x;
+  height: 484px;
+  margin-top: 5.5em;
+}
+.leftSide {
+  display: flex;
+  overflow: hidden;
+}
+.lineRight {
+  width: 2px;
+  height: 200px;
+  background-color: black;
+  display: inline-block;
+  align-self: center;
+  margin-top: 5em;
+}
+
+/* BG elements **************************************************/
+
+.orbBig {
+  height: 550px;
+  width: 550px;
+  background-color: #e5ecfe;
+  border-radius: 50%;
+  align-self: center;
+  margin-left: 4.5em;
+  z-index: -3;
+  position: absolute;
+  margin-top: 6em;
+}
+.orbMedium {
+  height: 334px;
+  width: 334px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #7d97f4;
+  z-index: -2;
+  position: absolute;
+  left: 6%;
+  top: 22%;
+}
+.orbSmall {
+  height: 168px;
+  width: 168px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #f7a072;
+  z-index: -1;
+  position: absolute;
+  left: 19%;
+  top: 26%;
+}
+.bottomOrbOrange {
+  height: 334px;
+  width: 334px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #f7a072;
+  opacity: 50%;
+  position: absolute;
+  bottom: -20%;
+  left: 25%;
+  overflow: hidden;
+}
+.bottomOrbPurple {
+  height: 334px;
+  width: 334px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #7d97f4;
+  opacity: 50%;
+  position: absolute;
+  bottom: -35%;
+  left: 40%;
+  overflow: hidden;
+}
+
+.bottomOrbTiny {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #7d97f4;
+  opacity: 50%;
+  position: absolute;
+  bottom: 18%;
+  left: 49%;
+  overflow: hidden;
+}
+.topOrbTiny {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  align-self: center;
+  background-color: #7d97f4;
+  opacity: 50%;
+  z-index: -1;
+  position: absolute;
+  left: 42%;
+  top: 20%;
+}
+/* Content */
+.leftSideContent {
+    width:400px;
+  align-self: center;
+  margin-left: 9.1em;
+  margin-bottom: -4em;
+  text-align: left;
+}
+.textH1 {
+  font-size: 42px;
+  font-weight: 200;
+  text-align: left;
+}
+.textOrange {
+  color: #f7a072;
+}
+.textPurple {
+  color: #7d97f4;
+}
+.textWhite {
+  color: white;
+ 
+}
+.descriptionText{
+    color: #514E4E;
+    text-align: left;
+}
+.spacer{
+    height: 80px;
+}
+
+.enlarger:hover{
+    transition: transform 2s;
+    transform: scale(1.2);
+
+}
+li{
+    transition: transform ease-in-out 0.5s;
+}
+li:hover{
+    
+    transform:scale(1.1)
+}

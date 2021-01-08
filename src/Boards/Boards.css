@@ -1,0 +1,61 @@
+.boardsContainer {
+  background-image: url("../assets/images/0.jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  text-align: center;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  /* height: 100%; */
+  top: 0;
+  position: absolute;
+  z-index: -1;
+  padding-top: 4em;
+  /* overflow-y: none; */
+}
+
+.boards {
+  display: flex;
+  min-height: 90%;
+  max-height: 90%;
+}
+.containerWrapper {
+  display: flex;
+  min-height: 90%;
+  max-height: 90%;
+  overflow-x: scroll;
+  overflow-y: none;
+ 
+}
+.addList {
+  margin: 5px;
+  padding: 5px; 
+  width: 300px;
+  min-height: 30px;
+  background-color: rgba(211, 211, 211, 0.4);
+  max-height: 600px;
+  display: inline-block;
+  min-width: 300px;
+  max-width: 300px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  color: white;
+}
+.addListButton{
+  color: white !important;
+  margin: 5px !important;
+  padding: 5px !important;
+  background-color: rgba(211, 211, 211, 0.4) !important;
+} 
+.addListInput{
+  padding: 5px;
+  margin:5px;
+}
+.addListCloseIcon{
+  justify-self: center;
+  align-self: center;
+  margin-left: 2em;
+}

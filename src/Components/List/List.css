@@ -1,0 +1,61 @@
+/* .listContainer {
+} */
+.title{
+  cursor: pointer;
+}
+.list {
+  width: 300px;
+  min-height: 75px;
+  background-color: #ebecf0;
+  max-height: 600px;
+  display: inline-block;
+  min-width: 300px;
+  max-width: 300px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+.cardTitleSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+/* .menuItem {
+} */
+.listContent {
+  overflow-y: auto;
+  max-height: 500px;
+  min-height: 5px;
+  
+}
+.listFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  align-content: center;
+  align-items: center;
+}
+.addNewCardContent {
+  margin: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+}
+
+.addNewCardControls {
+  display: flex;
+  flex-direction: column;
+}
+
+.closeIcon {
+  align-self: flex-end;
+  cursor: pointer;
+}
+.moreHorizonIcon {
+  cursor: pointer;
+}
+.MuiButton-label{
+  text-transform: none !important;
+}

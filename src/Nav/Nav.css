@@ -1,0 +1,56 @@
+.container{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items:center
+    
+}
+.logo{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px;
+    margin-left: 150px;
+    cursor: pointer;
+
+}
+.grassIcon{
+    width: 40px;
+    height: 40px;
+    margin-top: 0;
+   
+
+}
+.linksRouter{
+    text-decoration: none;
+}
+.navLinks{
+    display: flex;
+    width: 50%;
+    justify-content:flex-end ;
+    margin: 10px;
+    margin-right: 150px;
+}
+.navItemsList{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    align-items: center;
+    margin:10px;
+    padding: 0;
+    margin-right: 12em;
+    align-self: flex-start;
+    
+    
+
+}
+.navListItem{
+    color:#514E4E;
+    cursor: pointer;
+    font-size: 18px;
+}
+.button{
+    width: 80px !important;
+}
+
