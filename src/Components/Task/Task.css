@@ -22,3 +22,8 @@
   font-weight: 100;
   font-size: 14px;
 }
+.taskCloseIcon{
+  float:right;
+  cursor: pointer;
+  z-index: 5;
+}

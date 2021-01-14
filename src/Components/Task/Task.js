@@ -1,10 +1,8 @@
 import React from "react";
 import "./Task.css";
-
+import CloseIcon from "@material-ui/icons/Close";
 const Task = (props) => {
-  console.log("Content Lala G", props.content, props);
   const { provided, innerRef } = props;
-
   return (
     <div
       className="taskContainer"
@@ -12,6 +10,11 @@ const Task = (props) => {
       {...provided.dragHandleProps}
       ref={innerRef}
     >
+      {" "}
+      <CloseIcon
+        onClick={() => props.handleRemoveTask(props.taskId, props.pId)}
+        className="taskCloseIcon"
+      ></CloseIcon>
       <span className="taskText">{props.content}</span>
     </div>
   );

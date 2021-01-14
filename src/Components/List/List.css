@@ -2,6 +2,7 @@
 } */
 .title{
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 .list {
   width: 300px;
@@ -23,7 +24,7 @@
 /* .menuItem {
 } */
 .listContent {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   max-height: 500px;
   min-height: 5px;
   

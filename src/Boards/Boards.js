@@ -7,186 +7,139 @@ import AddIcon from "@material-ui/icons/Add";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TextField from "@material-ui/core/TextField";
 import CloseIcon from "@material-ui/icons/Close";
+import { useDispatch, useSelector } from "react-redux";
+import actions from "../store/actions";
 
 const Boards = (props) => {
-  
-  const initialState = {
-    lists: [
-      {
-        id: "1",
-        title: "BackLog",
-        tasks: [
-          {
-            taskId: "1",
-            content: "This is a task to make a task",
-          },
-        ],
-      },
-      {
-        id: "2",
-        title: "Acive",
-        tasks: [
-          {
-            taskId: "1",
-            content: "This is an active task",
-          },
-          {
-            taskId: "2",
-            content: "This is an active task 2",
-          },
-        ],
-      },
-      {
-        id: "3",
-        title: "PassiveActive",
-        tasks: [
-          {
-            taskId: "1",
-            content: "This is a passive-active task",
-          },
-          {
-            taskId: "2",
-            content: "This is a passive-active task 2",
-          },
-          {
-            taskId: "3",
-            content: "This is a passive-active task 3",
-          },
-        ],
-      },
-      {
-        id: "4",
-        title: "Bugs",
-        tasks: [
-          {
-            taskId: "1",
-            content: "This is a Bug in the task",
-          },
-          {
-            taskId: "2",
-            content: "This is a Bug in the task 2",
-          },
-          {
-            taskId: "3",
-            content: "This is a Bug in the task 3",
-          },
-          {
-            taskId: "4",
-            content: "This is a Bug in the task 4",
-          },
-        ],
-      },
-      {
-        id: "5",
-        title: "In review",
-        tasks: [
-          {
-            taskId: "1",
-            content: "This is a task in Review",
-          },
-          {
-            taskId: "2",
-            content: "This is a task in Review 2",
-          },
-          {
-            taskId: "3",
-            content: "This is a task in Review 3",
-          },
-          {
-            taskId: "4",
-            content: "This is a task in Review 4",
-          },
-          {
-            taskId: "5",
-            content: "This is a task in Review 5",
-          },
-        ],
-      },
-    ],
-  };
+  //Dispatch
+
+  const dispatch = useDispatch();
 
   //States
+
+  const list = useSelector((state) => state.lists);
   const [isAddList, setIsAddList] = useState(false);
-  const [list, setList] = useState(initialState);
   const [listName, setListName] = useState("");
-  useEffect(()=>{},[list]);
+  const [ob, setOb] = useState({});
+  useEffect(() => {}, [list]);
   //Functions
+  //Add Functions
   const addCard = (input, id) => {
     let data = list;
-    const ID = data.lists[id - 1].tasks.length;
+    const ID = data[id].tasks.length;
     let obj = {
-      taskId: (ID + 1).toString(),
+      taskId: ID.toString(),
       content: input,
     };
-
-    data.lists[id - 1].tasks.push(obj);
-    setList(data);
-    console.log("after", data);
+    data[0].title = data[0].title;
+    data[id].tasks.push(obj);
+    dispatch(actions.addCard(data));
+    setOb(obj);
+    console.log("ID Card", data);
     return input;
   };
+
   const handleListAdd = (e) => {
     setListName(e.target.value);
   };
+
   const addList = () => {
     let data = list;
-    let index = data.lists.length;
+    let index = data.length;
     let obj = {
-      id: (index - 1).toString,
+      id: index.toString(),
       title: listName.toString(),
       tasks: [],
     };
-    data.lists.push(obj);
-    setList(data);
-    console.log("koko", index, data);
+    data.push(obj);
+    dispatch(actions.addList(data));
+    setOb(obj);
+    console.log("List", data);
     return true;
+  };
+  const handleRemoveTask = (id, parentId) => {
+    let items = list;
+
+    let length = items[parentId].tasks.length;
+    let index;
+    for (let x = 0; x < length; x++) {
+      if (items[parentId].tasks[x].taskId == id) {
+        index = x;
+      }
+    }
+    const [selectedTask] = items[parentId].tasks.splice(index, 1);
+    dispatch(actions.removeCard(items));
+    setOb({});
+  };
+
+  const handleRemoveList = (id) => {
+    let items = list;
+    id = parseInt(id);
+    let length = items.length;
+    let index;
+    for (let x = 0; x < length; x++) {
+      if (id == items[x].id) {
+        index = x;
+      }
+    }
+
+    const [selectedTask] = items.splice(index, 1);
+    dispatch(actions.removeCard(items));
+    setOb({});
+    console.log("ID", parseInt(id), items, index);
   };
 
   const handleOnDragEnd = (result) => {
     let items = list;
-    const [selectedTask] = items.lists[
-      result.source.droppableId - 1
-    ].tasks.splice(result.source.index, 1);
-    // selectedTask.taskId
-    const length = items.lists[result.destination.droppableId - 1].tasks.length;
-    if(result.source.droppableId !== result.destination.droppableId){
-      selectedTask.taskId = `${length + 1}`;
+    if (result.type == "task") {
+      const [selectedTask] = items[result.source.droppableId].tasks.splice(
+        result.source.index,
+        1
+      );
+      const length = items[result.destination.droppableId].tasks.length;
+      if (result.source.droppableId !== result.destination.droppableId) {
+        selectedTask.taskId = `${length}`;
+      }
+      items[result.destination.droppableId].tasks.splice(
+        result.destination.index,
+        0,
+        selectedTask
+      );
+      console.log("Items", items); //Move
+      dispatch(actions.moveCard(items));
+      console.log("result", result); //Move
+      setOb({});
+    } else if (result.type == "column") {
+      console.log("column", result);
+      const [selectedList] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, selectedList);
+      console.log("List Selected", selectedList);
+      dispatch(actions.moveCard(items));
+      setOb({});
     }
-    items.lists[result.destination.droppableId - 1].tasks.splice(
-      result.destination.index,
-      0,
-      selectedTask
-    );
-    // items.lists[result.destination.droppableId-1].tasks[length].taskId=length;
-    console.log(
-      "list:",
-      list,
-      "selectedTask:",
-      selectedTask,
-      "result:",
-      result,
-      "length:",
-      length
-    );
-    setList(items);
-    console.log("items", items);
+    console.log("newState", list);
   };
+
   return (
     <div className="boardsContainer">
       <div className="containerWrapper">
-        <div className="boards">
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            {list.lists.map((x, index) => {
-              return (
-                <Droppable droppableId={x.id}>
-                  {(provided) => (
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="columns" direction="horizontal" type="column">
+            {(provided) => (
+              <div
+                className="boards"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {list.map((x, index) => {
+                  return (
                     <List
+                      handleRemoveList={handleRemoveList}
+                      index={index}
                       key={x.id}
                       title={x.title}
                       id={x.id}
                       addCard={addCard}
-                      provided={provided}
-                      {...provided.droppableProps}
-                      innerRef={provided.innerRef}
                     >
                       {x.tasks !== undefined
                         ? x.tasks.map((k, index) => {
@@ -198,26 +151,33 @@ const Boards = (props) => {
                               >
                                 {(provided) => (
                                   <Task
+                                    handleRemoveTask={handleRemoveTask}
                                     content={k.content}
                                     provided={provided}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     innerRef={provided.innerRef}
                                     key={x.id + k.taskId}
-                                  ></Task>
+                                    taskId={k.taskId}
+                                    pId={x.id}
+                                  >
+                                    {" "}
+                                  </Task>
                                 )}
                               </Draggable>
                             );
                           })
                         : ""}
-                      {provided.placeholder}
+                      {/* {provided.placeholder} */}
                     </List>
-                  )}
-                </Droppable>
-              );
-            })}
-          </DragDropContext>
-        </div>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
         <div className="addListContainer">
           <div className="addList">
             {!isAddList && (
