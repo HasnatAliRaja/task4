@@ -44,17 +44,29 @@ const removeCard = (result) => {
     } catch (error) {}
   };
 };
-const renameList = (result,id) => {
+const renameList = (result, id) => {
   return (dispatch) => {
     try {
       dispatch({
         type: constants.RENAME_LIST,
-        payload: { result,
-         id},
+        payload: { result, id },
       });
     } catch (error) {
       console.log(error);
     }
   };
 };
-export default { moveCard, addCard, addList, removeCard };
+const moveList = (result, id) => {
+  return (dispatch) => {
+    try {
+      dispatch({
+        type: constants.MOVE_LIST,
+        payload: { result },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export default { moveCard, addCard, addList, removeCard, moveList };

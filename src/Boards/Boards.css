@@ -17,7 +17,6 @@
 
 .boards {
   display: flex;
-  /* min-width: 320px; */
   min-height: 90%;
   max-height: 90%;
 }

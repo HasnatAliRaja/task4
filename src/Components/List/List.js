@@ -86,10 +86,10 @@ const List = (props) => {
           className="listContainer"
           key={props.id}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
+          
           ref={provided.innerRef}
         >
-          <div className="list">
+          <div className="list" {...provided.dragHandleProps}>
             <div className="cardTitleSection">
               <span onClick={handleRenameList} className="title">
                 {editTitle ? (

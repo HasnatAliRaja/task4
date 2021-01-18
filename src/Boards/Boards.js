@@ -90,32 +90,15 @@ const Boards = (props) => {
   };
 
   const handleOnDragEnd = (result) => {
-    let items = list;
+    if (result.destination == null) {
+      console.log("Null Dude!")
+      return 0;
+    }
+
     if (result.type == "task") {
-      const [selectedTask] = items[result.source.droppableId].tasks.splice(
-        result.source.index,
-        1
-      );
-      const length = items[result.destination.droppableId].tasks.length;
-      if (result.source.droppableId !== result.destination.droppableId) {
-        selectedTask.taskId = `${length}`;
-      }
-      items[result.destination.droppableId].tasks.splice(
-        result.destination.index,
-        0,
-        selectedTask
-      );
-      console.log("Items", items); //Move
-      dispatch(actions.moveCard(items));
-      console.log("result", result); //Move
-      setOb({});
+      dispatch(actions.moveCard(result));
     } else if (result.type == "column") {
-      console.log("column", result);
-      const [selectedList] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, selectedList);
-      console.log("List Selected", selectedList);
-      dispatch(actions.moveCard(items));
-      setOb({});
+      dispatch(actions.moveList(result));
     }
     console.log("newState", list);
   };
